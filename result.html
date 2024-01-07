@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .header {
+            width: 100%;
+            height: 10px;
+        }
+
+        .body {
+            width: 100%;
+            height: 600px;
+        }
+
+        #JR {
+            width: 100%;
+            height: 200px;
+        }
+
+        #FH {
+            width: 100%;
+            height: 400px;
+        }
+
+        #Flight {
+            width: 100%;
+            height: 400px;
+            
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            width: 100%;
+            height: 50px;
+        }
+
+        li {
+            width: 30%;
+            float: left;
+            margin: 5px;
+        }
+
+        .choiceButton {
+            height: 30px;
+            border-style: solid;
+            border-style: hidden;
+            background-color: pink;
+            color: black;
+        }
+
+        #Hotel {
+            width: 100%;
+            height: 800px;
+           
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            background-color: pink;
+            border: 1px solid pink;
+            text-align: left;
+            text-size-adjust: auto;
+            padding: 8px;
+        }
+
+        td {
+            border: 1px solid pink;
+            text-align: left;
+            text-size-adjust: auto;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: pink;
+        }
+
+        #Total {
+            width: 100%;
+            height: 900px;
+        }
+
+        .TotalBlock {
+            width: 100%;
+            height: 50px;
+            border-style: hidden;
+        }
+
+        .footer {
+            width: 100%;
+            height: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header"></div>
+    <div class="body">
+        <!--JR-->
+        <div id="JR">
+            <div><h1>JR info</h1></div>
+            <table border-style="hidden">
+                <thead>
+                    <tr>
+                        <th>JR station_iata</th>
+                        <th>IATA</th>
+                        <th>JR station_destination</th>
+                        <th>TicketPrice</th>
+                        <th>Time(min)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table_data_jr %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <hr />
+        <div id="FH">
+            <!--Flight-->
+            <div id="Flight">
+                <h1>Top5 Flight Tickets</h1>
+                <form method="post">
+                    <input type="hidden" id="sort" name="sort" />
+                    <ul>
+                        <!-- <li class="choiceButton" onclick="sortingButton(this, 1)">Sorting By Price</li> -->
+                        <!-- <li class="choiceButton" onclick="sortingButton(this, 2)">Sorting By Time</li> -->
+                        <!-- <li class="choiceButton" onclick="sortingButton(this, 3)">Sorting By All</li> -->
+                    </ul>
+                </form>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Airport</th>
+                            <th>Airport_du</th>
+                            <th>Company</th>
+                            <th>departure_Time</th>
+                            <th>landing_Time</th>
+                            <th>Average_duration</th>
+                            <th>Average_ticketprice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in table_data_flight %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                            <td>{{ row[6] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!--Hotel-->
+            <div id="Hotel">
+                <h1>Top5 Highest Rating Hotels</h1>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Hotel Name</th>
+                            <th>Price</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in result_table_hotel %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="Total">
+            <!-- <h2 class="TotalBlock">Average Cost:</h2> -->
+            <!-- <h2 class="TotalBlock">Average Time:</h2> -->
+
+        </div>
+    </div>
+    <div class="footer"></div>
+    <script language="javascript">
+        function sortingButton(element, temp) {
+            var buttons = document.querySelectorAll('.choiceButton');
+            buttons.forEach(function (button) {
+                button.style.background = 'pink';
+            });
+            element.style.background = 'hotpink';
+            document.getElementById('sort').value = temp;
+            form.submit();
+        }
+    </script>
+</body>
+</html>
